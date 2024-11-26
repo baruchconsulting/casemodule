@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria Case Study</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Pizzeria Case Study</h1>
+
+        <!-- Screen 1: Introduction -->
+        <div id="screen1" class="screen active">
+            <h2>Introduction</h2>
+            <p>Your client is a local pizzeria owner. She notices that around lunchtime, the customer line goes out the door. She is considering buying a second oven to increase her capacity.</p>
+            <div class="buttons">
+                <button onclick="nextScreen(1.5)">Start</button>
+            </div>
+        </div>
+
+        <!-- Screen 1.5: Data -->
+        <div id="screen1.5" class="screen">
+            <h2>Data Overview</h2>
+            <p>The second oven would cost $25,000. Currently, the average additional pizzas sold per day is 50, with an average price of $20 per pizza. The profit margin on each pizza is 20%.</p>
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(1)">Previous</button>
+                <button onclick="nextScreen(2)">Continue</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Formula for daily revenue -->
+        <div id="screen2" class="screen">
+            <h2>Step 1: Choose the Revenue Formula</h2>
+            <p>To calculate the daily revenue, select the correct variables and operator to complete the formula.</p>
+
+            <div class="formula-section">
+                Daily Revenue = 
+                <select id="var1" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizzas_sold">pizzas sold</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+
+                <select id="operator" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="*">*</option>
+                    <option value="+">+</option>
+                    <option value="/">/</option>
+                </select>
+
+                <select id="var2" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="pizzas_sold">pizzas sold</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(1.5)">Previous</button>
+                <button onclick="checkRevenueFormula()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Filling in the Calculation -->
+        <div id="screen3" class="screen">
+            <h2>Step 2: Calculate the Revenue</h2>
+            <p>Now that you have the correct formula, enter the values to calculate the revenue.</p>
+
+            <div class="formula-section">
+                <input type="number" id="value1" placeholder="Enter value 1" class="input-field">
+                <span id="selectedOperator"></span>
+                <input type="number" id="value2" placeholder="Enter value 2" class="input-field">
+                <span>=</span>
+                <input type="number" id="revenueResult" placeholder="Enter result" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(2)">Previous</button>
+                <button onclick="checkRevenueCalculation()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 3.1: Introduction to Profit Calculation -->
+        <div id="screen3.1" class="screen">
+            <h2>Calculate Daily Profit</h2>
+            <p>Great! You've calculated the daily revenue. Now, let's calculate the daily profit using the profit margin.</p>
+            <div class="buttons">
+                <button onclick="nextScreen(3.2)">Start</button>
+            </div>
+        </div>
+
+        <!-- Screen 3.2: Profit Margin Calculation -->
+        <div id="screen3.2" class="screen">
+            <h2>Step 3: Calculate the Profit</h2>
+            <p>Enter the daily revenue and profit margin to calculate the daily profit.</p>
+            
+            <div class="profit-calculation-section">
+                <input type="number" id="dailyRevenue" placeholder="Enter daily revenue" class="input-field">
+                <span>*</span>
+                <input type="number" id="profitMargin" placeholder="Enter profit margin (e.g., 0.20)" class="input-field">
+                <span>=</span>
+                <input type="number" id="profitResult" placeholder="Enter profit result" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3.1)">Previous</button>
+                <button onclick="checkProfitCalculation()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 3.5: Conclusion for Profit Calculation -->
+        <div id="screen3.5" class="screen">
+            <h2>Daily Profit Calculation Complete</h2>
+            <p>You've successfully calculated the daily profit. Now, let's determine the break-even point for the second oven.</p>
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3.2)">Previous</button>
+                <button onclick="nextScreen(4)">Next</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Select Break-Even Formula -->
+        <div id="screen4" class="screen">
+            <h2>Step 4: Choose the Break-Even Formula</h2>
+            <p>Select the correct variables and operator to complete the break-even formula.</p>
+
+            <div class="formula-selection">
+                Break-even = 
+                <select id="breakEvenVar1" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="oven_cost">oven cost</option>
+                    <option value="daily_profit">daily profit</option>
+                </select>
+
+                <select id="breakEvenOperator" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="/">/</option>
+                </select>
+
+                <select id="breakEvenVar2" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="daily_profit">daily profit</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3.5)">Previous</button>
+                <button onclick="checkBreakEvenFormula()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 4.5: Calculate Break-Even Days -->
+        <div id="screen4.5" class="screen">
+            <h2>Step 5: Calculate Break-Even Days</h2>
+            <p>Enter the values to calculate the break-even days.</p>
+
+            <div class="break-even-section">
+                <input type="number" id="breakEvenValue1" placeholder="Enter oven cost" class="input-field">
+                <span id="selectedBreakEvenOperator"></span>
+                <input type="number" id="breakEvenValue2" placeholder="Enter daily profit" class="input-field">
+                <span>=</span>
+                <input type="number" id="breakEvenResult" placeholder="Enter break-even days" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(4)">Previous</button>
+                <button onclick="checkBreakEvenDaysCalculation()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Final Conclusion -->
+        <div id="screen5" class="screen">
+            <h2>Conclusion</h2>
+            <p>wip but slay congrats for now you should join cyc</p>
+            <div class="buttons">
+                <button onclick="nextScreen(1)">Restart Case Study</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
